@@ -25,3 +25,6 @@ $ yarn run start
 # watch mode
 $ yarn run start:dev
 ```
+
+## Testing APIs
+Supplied in the postman folder is a collection of API that you can quickly import to postman and call create and get user

@@ -2,19 +2,20 @@ import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserService } from './user.service';
 import { CoinBalance } from './interfaces/coin-balance.interface';
+import { User } from './interfaces/users.interface';
 
 @Controller('user')
 export class UserController {
     constructor(private userService:UserService){};
 
     @Post('create')
-    createUser(@Body() createUserDto:CreateUserDto):void {
-        this.userService.createUser(createUserDto);
+    createUser(@Body() createUserDto:CreateUserDto): User {
+        return this.userService.createUser(createUserDto);
     }
 
-    @Get('/:name')
-    getUser(@Param('username') username:string): any{
-        this.userService.getUser(username);
+    @Get('/:username')
+    getUser(@Param('username') username:string): User {
+        return this.userService.getUser(username);
     }
 
     //In a full implementation the users name would not be needed as you would be authenticated and know what user you are
