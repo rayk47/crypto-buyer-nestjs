@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './interfaces/users.interface';
 import { CreateUserDto } from './dto/create-user.dto';
 import { CoinBalance } from './interfaces/coin-balance.interface';
@@ -24,7 +24,10 @@ export class UserService {
     }
 
     getUser(username:string):User {
-        return this.users.find(user => user.username === username);
+        const user = this.users.find(user => user.username === username);
+        if(!user){
+            throw new NotFoundException(`Unable to find user ${username}`);
+        } return user;
     }
 
     getUserBalance(username:string):CoinBalance{
